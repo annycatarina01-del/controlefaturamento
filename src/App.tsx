@@ -62,8 +62,8 @@ export default function App() {
 
   if (!isApproved && !isAdmin) {
     return (
-      <div className="min-h-screen bg-[#002B49] flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-20 h-20 bg-[#D4AF37] text-[#002B49] rounded-3xl flex items-center justify-center mb-8 shadow-2xl animate-pulse">
+      <div className="min-h-screen bg-[#002137] flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-20 h-20 bg-[#D4AF37] text-[#002137] rounded-3xl flex items-center justify-center mb-8 shadow-2xl animate-pulse">
           <Shield size={40} />
         </div>
         <h1 className="text-2xl font-bold text-white mb-4 uppercase tracking-widest">
@@ -87,7 +87,7 @@ export default function App() {
 
   if (isPaused && !isAdmin) {
     return (
-      <div className="min-h-screen bg-[#002B49] flex flex-col items-center justify-center p-6 text-center">
+      <div className="min-h-screen bg-[#002137] flex flex-col items-center justify-center p-6 text-center">
         <div className="w-20 h-20 bg-orange-500 text-white rounded-3xl flex items-center justify-center mb-8 shadow-2xl">
           <Pause size={40} />
         </div>

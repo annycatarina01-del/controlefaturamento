@@ -37,7 +37,7 @@ export function AuthPage({ onLogin }: AuthPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#002B49] relative flex flex-col justify-center items-center p-4 py-12 overflow-hidden">
+    <div className="min-h-screen bg-[#002137] relative flex flex-col justify-center items-center p-4 py-12 overflow-hidden">
       {/* Background Decorative Elements to mimic the brand feel */}
       <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[#D4AF37] opacity-5 blur-[120px]"></div>
       <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[#D4AF37] opacity-5 blur-[120px]"></div>

@@ -50,7 +50,7 @@ export function LoginForm({
   return (
     <div className="w-full max-w-md bg-white/95 backdrop-blur-sm p-8 rounded-3xl shadow-2xl border border-white/20">
       <div className="text-center mb-8">
-        <h2 className="text-xl font-bold text-[#002B49]">
+        <h2 className="text-xl font-bold text-[#002137]">
           {isLogin ? "Acesso Restrito" : "Novo Cadastro"}
         </h2>
         <p className="text-gray-500 text-sm mt-1">
@@ -158,7 +158,7 @@ export function LoginForm({
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-[#002B49] text-white py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#003d66] transition-all shadow-lg shadow-blue-900/20 disabled:opacity-50 mt-6 border-b-4 border-blue-950 active:border-b-0 active:translate-y-1"
+          className="w-full bg-[#002137] text-white py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#003d66] transition-all shadow-lg shadow-blue-900/20 disabled:opacity-50 mt-6 border-b-4 border-blue-950 active:border-b-0 active:translate-y-1"
         >
           {loading
             ? "Processando..."
@@ -175,7 +175,7 @@ export function LoginForm({
             setIsLogin(!isLogin);
             setValidationError(null);
           }}
-          className="text-[11px] text-[#002B49] hover:text-indigo-800 font-bold uppercase tracking-wider"
+          className="text-[11px] text-[#002137] hover:text-indigo-800 font-bold uppercase tracking-wider"
         >
           {isLogin
             ? "Solicitar Acesso / Cadastrar"
