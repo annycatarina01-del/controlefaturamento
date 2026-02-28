@@ -10,6 +10,7 @@ import { AuthService } from "./modules/auth/auth.service";
 import { User } from "./modules/auth/auth.types";
 import { AdminDashboard } from "./modules/auth/components/AdminDashboard";
 import { LogOut, Shield, LayoutDashboard, Pause } from "lucide-react";
+import logo from "./assets/logo.png";
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -113,11 +114,9 @@ export default function App() {
     <div className="min-h-screen bg-gray-50 font-sans">
       <nav className="bg-white border-b border-gray-100 sticky top-0 z-40">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#002B49] text-[#D4AF37] rounded-lg flex items-center justify-center">
-              <span className="font-black text-xs italic">CA</span>
-            </div>
-            <span className="font-bold text-gray-900 uppercase tracking-tighter">Cont. Anny</span>
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="Logo" className="h-8 w-auto drop-shadow-sm" />
+            <span className="font-bold text-gray-900 uppercase tracking-tighter hidden sm:inline-block">Cont. Anny</span>
           </div>
 
           <div className="flex items-center gap-4">
