@@ -15,6 +15,20 @@ export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState<"app" | "admin">("app");
+  const [hasPending, setHasPending] = useState(false);
+
+  useEffect(() => {
+    if (user?.user_metadata?.role === "admin") {
+      const checkPending = async () => {
+        const { count } = await AuthService.getPendingCount();
+        setHasPending((count || 0) > 0);
+      };
+      checkPending();
+      // Check every minute
+      const interval = setInterval(checkPending, 60000);
+      return () => clearInterval(interval);
+    }
+  }, [user]);
 
   useEffect(() => {
     AuthService.getCurrentUser().then(({ user }) => {
@@ -55,8 +69,8 @@ export default function App() {
           Acesso Pendente
         </h1>
         <p className="text-blue-100/60 max-w-sm leading-relaxed mb-8">
-          Olá, <span className="text-white font-bold">{user.user_metadata?.nome}</span>. 
-          Sua solicitação de acesso foi enviada com sucesso. 
+          Olá, <span className="text-white font-bold">{user.user_metadata?.nome}</span>.
+          Sua solicitação de acesso foi enviada com sucesso.
           Por favor, aguarde a liberação do administrador para acessar o sistema.
         </p>
         <button
@@ -80,8 +94,8 @@ export default function App() {
           Acesso Suspenso
         </h1>
         <p className="text-blue-100/60 max-w-sm leading-relaxed mb-8">
-          Olá, <span className="text-white font-bold">{user.user_metadata?.nome}</span>. 
-          Seu acesso ao sistema foi temporariamente pausado pelo administrador. 
+          Olá, <span className="text-white font-bold">{user.user_metadata?.nome}</span>.
+          Seu acesso ao sistema foi temporariamente pausado pelo administrador.
           Entre em contato para mais informações.
         </p>
         <button
@@ -111,25 +125,26 @@ export default function App() {
               <div className="flex items-center gap-1 bg-gray-50 p-1 rounded-xl">
                 <button
                   onClick={() => setView("app")}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
-                    view === "app" ? "bg-white shadow-sm text-indigo-600" : "text-gray-400 hover:text-gray-600"
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${view === "app" ? "bg-white shadow-sm text-indigo-600" : "text-gray-400 hover:text-gray-600"
+                    }`}
                 >
                   <LayoutDashboard size={14} />
                   Sistema
                 </button>
                 <button
                   onClick={() => setView("admin")}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
-                    view === "admin" ? "bg-white shadow-sm text-indigo-600" : "text-gray-400 hover:text-gray-600"
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all relative ${view === "admin" ? "bg-white shadow-sm text-indigo-600" : "text-gray-400 hover:text-gray-600"
+                    }`}
                 >
                   <Shield size={14} />
                   Admin
+                  {hasPending && (
+                    <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white animate-pulse" />
+                  )}
                 </button>
               </div>
             )}
-            
+
             <button
               onClick={handleLogout}
               className="p-2 text-gray-400 hover:text-red-500 transition-colors"

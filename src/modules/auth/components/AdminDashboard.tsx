@@ -53,6 +53,11 @@ export function AdminDashboard() {
 
       setPendingUsers(formattedUsers.filter((u) => !u.user_metadata?.approved && u.user_metadata?.role !== "admin"));
       setActiveUsers(formattedUsers.filter((u) => u.user_metadata?.approved || u.user_metadata?.role === "admin"));
+
+      // Notify if there are pending users
+      if (formattedUsers.some(u => !u.user_metadata?.approved && u.user_metadata?.role !== "admin")) {
+        // This is a simple logic for the dash, we could add a state for notification if needed
+      }
     } catch (err) {
       console.error("Erro ao buscar usuários:", err);
     } finally {
@@ -163,8 +168,8 @@ export function AdminDashboard() {
         <button
           onClick={() => setActiveTab("pending")}
           className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wider transition-all ${activeTab === "pending"
-              ? "bg-white shadow-sm text-indigo-600"
-              : "text-gray-400 hover:text-gray-600"
+            ? "bg-white shadow-sm text-indigo-600"
+            : "text-gray-400 hover:text-gray-600"
             }`}
         >
           <Clock size={16} />
@@ -173,8 +178,8 @@ export function AdminDashboard() {
         <button
           onClick={() => setActiveTab("active")}
           className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wider transition-all ${activeTab === "active"
-              ? "bg-white shadow-sm text-indigo-600"
-              : "text-gray-400 hover:text-gray-600"
+            ? "bg-white shadow-sm text-indigo-600"
+            : "text-gray-400 hover:text-gray-600"
             }`}
         >
           <Users size={16} />
@@ -211,6 +216,9 @@ export function AdminDashboard() {
                           <div className="flex flex-col">
                             <span className="font-bold text-gray-900">
                               {user.user_metadata?.nome}
+                            </span>
+                            <span className="text-xs text-gray-400">
+                              {user.user_metadata?.celular}
                             </span>
                           </div>
                         </td>
@@ -300,8 +308,8 @@ export function AdminDashboard() {
                                   onClick={() => handleTogglePause(user.id, !!user.user_metadata?.paused)}
                                   disabled={!!actionLoading}
                                   className={`p-2 rounded-lg transition-colors disabled:opacity-50 ${user.user_metadata?.paused
-                                      ? "text-green-600 hover:bg-green-50"
-                                      : "text-orange-500 hover:bg-orange-50"
+                                    ? "text-green-600 hover:bg-green-50"
+                                    : "text-orange-500 hover:bg-orange-50"
                                     }`}
                                   title={user.user_metadata?.paused ? "Retomar" : "Pausar"}
                                 >

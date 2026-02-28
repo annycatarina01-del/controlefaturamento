@@ -92,4 +92,14 @@ export const AuthService = {
     }
     return { user: null };
   },
+
+  async getPendingCount() {
+    const { count, error } = await supabase
+      .from("profiles")
+      .select("*", { count: "exact", head: true })
+      .eq("approved", false)
+      .neq("role", "admin");
+
+    return { count, error };
+  }
 };
